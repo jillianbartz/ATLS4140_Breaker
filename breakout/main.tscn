@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://dp6r2aw6jsvov"]
+
+[ext_resource type="Script" path="res://Actors/ball.gd" id="1_yn4bn"]
+[ext_resource type="Script" path="res://Actors/paddle.gd" id="2_pdeke"]
+[ext_resource type="PackedScene" uid="uid://q08i8g1kbii8" path="res://Actors/brick.tscn" id="3_2sqou"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rf82r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ul448"]
+size = Vector2(3.2336, 2.63036)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_brvbu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8o8r8"]
+size = Vector2(25.3333, 8.66667)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_47w5v"]
+normal = Vector2(1, 0)
+distance = 0.200002
+
+[node name="Main" type="Node2D"]
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(601, 290)
+motion_mode = 1
+script = ExtResource("1_yn4bn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+rotation = 3.14159
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_rf82r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+scale = Vector2(6.18505, 7.60352)
+shape = SubResource("RectangleShape2D_ul448")
+
+[node name="Paddle" type="CharacterBody2D" parent="."]
+position = Vector2(742, 601)
+motion_mode = 1
+script = ExtResource("2_pdeke")
+
+[node name="Sprite2D" type="Sprite2D" parent="Paddle"]
+scale = Vector2(75, 25)
+texture = SubResource("CanvasTexture_brvbu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_8o8r8")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(1, 294)
+scale = Vector2(5, -5)
+shape = SubResource("WorldBoundaryShape2D_47w5v")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1154, -10)
+scale = Vector2(-0.602425, 1.08221)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1, 294)
+scale = Vector2(5, -5)
+shape = SubResource("WorldBoundaryShape2D_47w5v")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(798, -3)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(1, 294)
+scale = Vector2(5.95644, 8.45167)
+shape = SubResource("WorldBoundaryShape2D_47w5v")
+
+[node name="Brick" parent="." instance=ExtResource("3_2sqou")]
+position = Vector2(218, 189)
+
+[node name="Brick2" parent="." instance=ExtResource("3_2sqou")]
+position = Vector2(607, 182)
+
+[node name="Brick3" parent="." instance=ExtResource("3_2sqou")]
+position = Vector2(838, 276)
