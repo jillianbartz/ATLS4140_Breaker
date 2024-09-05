@@ -8,6 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	process_material.scale_max = self.scale.x / 150
-	process_material.scale_max = self.scale.y / 150
 	pass

@@ -9,32 +9,36 @@ extends CharacterBody2D
 
 var forward = Vector2(1,1).normalized()
 const PADDLE_WIDTH: float = 100.0
-var current_score: int = 0
 var is_running: bool = false
-
 
 #func _ready() -> void:
 	#velocity = Vector2(1,1).normalized()
 
 func _physics_process(delta: float) -> void:
-		
-	
-	if (not is_running):
-		if (Input.is_action_just_pressed("click_window")):
-			is_running = true
-			start_text.visible = false
-			visible = true
-		return
+	#if (not is_running):
+		#if (Input.is_action_just_pressed("click_window")):
+			#is_running = true
+			#start_text.visible = false
+			#visible = true
 	
 	var collision: KinematicCollision2D = move_and_collide(forward * speed)
+	if(get_tree().get_nodes_in_group("Bricks").is_empty()):
+		if(get_tree().current_scene.name == "Level2"):
+			get_tree().change_scene_to_file("res://start.tscn")
+		else: 
+			score_label.text = "???"
+			get_tree().change_scene_to_file("res://level2.tscn")
+		
 	if(collision):
 		forward = forward.bounce(collision.get_normal())
 		speed = clamp(speed + 0.5, 1, max_speed)
 		
+		if (collision.get_collider().is_in_group("BadBricks")):
+			get_tree().change_scene_to_file("res://start.tscn")
+		
 		if (collision.get_collider().is_in_group("Bricks")):
+			print(get_tree().get_nodes_in_group("Bricks").size())
 			collision.get_collider().queue_free()
-			current_score += 10
-			score_label.text = "SCORE: " + str(current_score)
 			
 		if(collision.get_collider().is_in_group("Paddle")):
 			var paddle_x = collision.get_collider().position.x - PADDLE_WIDTH / 2
@@ -43,9 +47,9 @@ func _physics_process(delta: float) -> void:
 			forward = Vector2.from_angle(bounce_angle)
 			 
 		if (collision.get_collider().is_in_group("GameOver")):
-			is_running = false
-			start_text.visible = true
-			start_text.text = "GAME OVER"
+			get_tree().change_scene_to_file("res://start.tscn")
+		
+		
 	## Add the gravity.
 	##if not is_on_floor():
 		##velocity += get_gravity() * delta
