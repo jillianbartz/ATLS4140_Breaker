@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://q08i8g1kbii8"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_1aeb0"]
+[ext_resource type="Texture2D" uid="uid://bxqew1nl5xv5e" path="res://Icons/fish.png" id="1_jbpsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nn70c"]
 size = Vector2(239.99, 59.2986)
@@ -9,8 +9,8 @@ size = Vector2(239.99, 59.2986)
 motion_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(150, 35)
-texture = SubResource("CanvasTexture_1aeb0")
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("1_jbpsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Bricks"]]
 position = Vector2(-0.296963, -0.0242456)

@@ -1,11 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dm5vmmxurc074"]
+[gd_scene load_steps=19 format=3 uid="uid://dm5vmmxurc074"]
 
 [ext_resource type="Texture2D" uid="uid://dn71cubjvg6nh" path="res://Icons/background.jpeg" id="1_tbx0a"]
 [ext_resource type="Script" path="res://Actors/ball.gd" id="2_t4tj2"]
 [ext_resource type="Texture2D" uid="uid://e2grt3o1i447" path="res://Icons/BubbleParticle.png" id="3_2kfqu"]
 [ext_resource type="Script" path="res://Actors/paddle.gd" id="4_ppyt8"]
+[ext_resource type="Texture2D" uid="uid://ctyvufq0m1cs0" path="res://Icons/shell.png" id="4_tap72"]
 [ext_resource type="Script" path="res://brick_manager.gd" id="5_mfea8"]
+[ext_resource type="Texture2D" uid="uid://tj4u270kyqgv" path="res://Icons/coral.png" id="6_5f2ye"]
 [ext_resource type="PackedScene" uid="uid://q08i8g1kbii8" path="res://Actors/brick.tscn" id="6_wbbgn"]
+[ext_resource type="FontFile" uid="uid://cmakjw5cyuntc" path="res://Icons/KiriFont.ttf" id="7_28bkw"]
+[ext_resource type="Script" path="res://bad_brick.gd" id="7_a53bu"]
+[ext_resource type="Texture2D" uid="uid://vglk6auyto83" path="res://Icons/shark.png" id="8_707gs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ipcaq"]
 
@@ -15,15 +20,11 @@ gravity = Vector3(0, 98, 0)
 scale_min = 0.01
 scale_max = 0.04
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_rf82r"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ul448"]
-size = Vector2(3.2336, 2.63036)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_brvbu"]
+size = Vector2(5.82049, 3.6825)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o8r8"]
-size = Vector2(25, 8.667)
+size = Vector2(30.1667, 12.3335)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_47w5v"]
 normal = Vector2(1, 0)
@@ -31,6 +32,9 @@ distance = 0.200002
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fav6h"]
 size = Vector2(1150, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfg34"]
+size = Vector2(239.99, 59.2986)
 
 [node name="Level2" type="Node2D"]
 material = SubResource("CanvasItemMaterial_ipcaq")
@@ -57,9 +61,8 @@ texture = ExtResource("3_2kfqu")
 lifetime = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
-rotation = 3.14159
-scale = Vector2(20, 20)
-texture = SubResource("CanvasTexture_rf82r")
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("4_tap72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 scale = Vector2(6.18505, 7.60352)
@@ -74,10 +77,11 @@ motion_mode = 1
 script = ExtResource("4_ppyt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="Paddle"]
-scale = Vector2(75, 25)
-texture = SubResource("CanvasTexture_brvbu")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_5f2ye")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-7.75, 5.49976)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_8o8r8")
 
@@ -111,6 +115,7 @@ offset_left = 29.0
 offset_top = 17.0
 offset_right = 458.0
 offset_bottom = 97.0
+theme_override_fonts/normal_font = ExtResource("7_28bkw")
 theme_override_font_sizes/normal_font_size = 45
 text = "Level 2"
 
@@ -121,10 +126,50 @@ position = Vector2(573, 670)
 position = Vector2(7, 8)
 shape = SubResource("RectangleShape2D_fav6h")
 
-[node name="BrickManager" type="Node2D" parent="."]
+[node name="BadBrick2" type="CharacterBody2D" parent="." groups=["BadBricks"]]
+position = Vector2(247, 296)
+script = ExtResource("7_a53bu")
+
+[node name="Sprite2D" type="Sprite2D" parent="BadBrick2"]
+position = Vector2(1, 1.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_707gs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BadBrick2" groups=["BadBricks"]]
+position = Vector2(0.703033, 1.47575)
+scale = Vector2(0.627502, 0.607915)
+shape = SubResource("RectangleShape2D_wfg34")
+
+[node name="BadBrick3" type="CharacterBody2D" parent="." groups=["BadBricks"]]
+position = Vector2(976, 86)
+script = ExtResource("7_a53bu")
+
+[node name="Sprite2D" type="Sprite2D" parent="BadBrick3"]
+position = Vector2(1, 1.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_707gs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BadBrick3" groups=["BadBricks"]]
+position = Vector2(0.703033, 1.47575)
+scale = Vector2(0.627502, 0.607915)
+shape = SubResource("RectangleShape2D_wfg34")
+
+[node name="BrickManager2" type="Node2D" parent="."]
 script = ExtResource("5_mfea8")
 brick_scene = ExtResource("6_wbbgn")
 
-[node name="Brick9" parent="BrickManager" instance=ExtResource("6_wbbgn")]
-modulate = Color(0.172549, 0.380392, 0.180392, 1)
+[node name="Brick9" parent="BrickManager2" instance=ExtResource("6_wbbgn")]
 position = Vector2(702, 146)
+
+[node name="Brick12" parent="BrickManager2" instance=ExtResource("6_wbbgn")]
+position = Vector2(377, 224)
+scale = Vector2(0.998061, 1)
+
+[node name="Brick14" parent="BrickManager2" instance=ExtResource("6_wbbgn")]
+position = Vector2(819, 222)
+
+[node name="Brick13" parent="BrickManager2" instance=ExtResource("6_wbbgn")]
+position = Vector2(609, 225)
+
+[node name="Brick11" parent="BrickManager2" instance=ExtResource("6_wbbgn")]
+position = Vector2(483, 148)

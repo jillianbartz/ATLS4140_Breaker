@@ -34,10 +34,9 @@ func _physics_process(delta: float) -> void:
 		speed = clamp(speed + 0.5, 1, max_speed)
 		
 		if (collision.get_collider().is_in_group("BadBricks")):
-			get_tree().change_scene_to_file("res://start.tscn")
+			get_tree().change_scene_to_file("res://game_over.tscn")
 		
 		if (collision.get_collider().is_in_group("Bricks")):
-			print(get_tree().get_nodes_in_group("Bricks").size())
 			collision.get_collider().queue_free()
 			
 		if(collision.get_collider().is_in_group("Paddle")):
@@ -47,7 +46,7 @@ func _physics_process(delta: float) -> void:
 			forward = Vector2.from_angle(bounce_angle)
 			 
 		if (collision.get_collider().is_in_group("GameOver")):
-			get_tree().change_scene_to_file("res://start.tscn")
+			get_tree().change_scene_to_file("res://game_over.tscn")
 		
 		
 	## Add the gravity.
