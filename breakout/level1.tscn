@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://e2grt3o1i447" path="res://Icons/BubbleParticle.png" id="3_uabkx"]
 [ext_resource type="Script" path="res://Actors/paddle.gd" id="4_lisog"]
 [ext_resource type="Texture2D" uid="uid://ctyvufq0m1cs0" path="res://Icons/shell.png" id="4_rk55p"]
-[ext_resource type="Script" path="res://brick_manager.gd" id="5_0dokd"]
+[ext_resource type="Script" path="res://Actors/brick_manager.gd" id="5_0dokd"]
 [ext_resource type="PackedScene" uid="uid://q08i8g1kbii8" path="res://Actors/brick.tscn" id="6_octls"]
 [ext_resource type="Texture2D" uid="uid://tj4u270kyqgv" path="res://Icons/coral.png" id="6_v2l7i"]
-[ext_resource type="Script" path="res://bad_brick.gd" id="7_3vc36"]
+[ext_resource type="Script" path="res://Actors/bad_brick.gd" id="7_3vc36"]
 [ext_resource type="FontFile" uid="uid://cmakjw5cyuntc" path="res://Icons/KiriFont.ttf" id="7_vru4v"]
 [ext_resource type="Texture2D" uid="uid://vglk6auyto83" path="res://Icons/shark.png" id="8_1qcqp"]
 
